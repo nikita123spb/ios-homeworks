@@ -11,6 +11,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+    
+        window = UIWindow(windowScene: windowScene)
+
+        let tabBarController = UITabBarController()
+
+        let feedNavigationController = UINavigationController()
+        let profileNavigationController = UINavigationController()
+
+        feedNavigationController.viewControllers = [FeedViewController()]
+        profileNavigationController.viewControllers = [ProfileViewController()]
+       
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "list.bullet"), tag: 0)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 1)
+
+        tabBarController.viewControllers = [feedNavigationController, profileNavigationController]
+
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+}
+}
+    
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -48,5 +72,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
 
